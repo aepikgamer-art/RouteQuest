@@ -5,11 +5,35 @@
 
 import SwiftUI
 
+/// Liquid Glass when iOS 26+, plain otherwise.
+extension View {
+    @ViewBuilder
+    func liquidGlassRow() -> some View {
+        if #available(iOS 26.0, *) {
+            self.glassEffect()
+        } else {
+            self
+        }
+    }
+}
+
 struct ContentView: View {
+    var body: some View {
+        TabView {
+            DiscoverView()
+                .tabItem { Label("Discover", systemImage: "safari") }
+            RacesView()
+                .tabItem { Label("Races", systemImage: "flag.checkered") }
+            SettingsView()
+                .tabItem { Label("Settings", systemImage: "gearshape") }
+        }
+    }
+}
+
+struct DiscoverView: View {
     @EnvironmentObject private var log: FlightLogStore
     @AppStorage("preferICAO") private var preferICAO = false
     @State private var filter = RouteFilter()
-    @State private var showSettings = false
 
     private let routes = DataLoader.loadRoutes()
     private let airports = DataLoader.loadAirports()
@@ -57,11 +81,6 @@ struct ContentView: View {
                         Label(filter.tag ?? "Any vibe", systemImage: "sparkles")
                     }
                     Toggle("Show already flown", isOn: $filter.showFlown)
-                    Picker("Airport codes", selection: $preferICAO) {
-                        Text("IATA (ATL)").tag(false)
-                        Text("ICAO (KATL)").tag(true)
-                    }
-                    .pickerStyle(.segmented)
                 } header: {
                     Text("Filters")
                 }
@@ -86,18 +105,6 @@ struct ContentView: View {
             .navigationDestination(for: ScoredRoute.self) { scored in
                 RouteDetailView(scored: scored)
                     .environmentObject(log)
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showSettings = true
-                    } label: {
-                        Image(systemName: "questionmark.circle")
-                    }
-                }
-            }
-            .sheet(isPresented: $showSettings) {
-                AboutSheet()
             }
         }
     }
@@ -132,6 +139,7 @@ struct RouteRow: View {
                 .foregroundStyle(.tertiary)
         }
         .padding(.vertical, 2)
+        .liquidGlassRow()
     }
 }
 
@@ -171,23 +179,7 @@ struct StatPill: View {
             Text(label).font(.caption2).foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
-    }
-}
-
-struct AboutSheet: View {
-    var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: 16) {
-                Label("RouteQuest recommends real airline routes to fly, ranked by an AI-written recommender engine.", systemImage: "sparkles")
-                Label("Every route in the dataset is (or was) flown by a real airline.", systemImage: "airplane")
-                Label("Switch between IATA (ATL) and ICAO (KATL) codes in the Filters section.", systemImage: "abc")
-                Label("This app was 100% coded by AI. No human wrote any of it. 🤖", systemImage: "brain")
-                Spacer()
-            }
-            .padding()
-            .navigationTitle("About")
-            .navigationBarTitleDisplayMode(.inline)
-        }
+        .liquidGlassRow()
     }
 }
 

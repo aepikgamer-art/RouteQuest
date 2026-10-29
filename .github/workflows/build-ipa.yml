@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build-ipa:
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v4
 
@@ -49,7 +49,7 @@ jobs:
         with:
           tag_name: build-latest
           name: RouteQuest (latest build)
-          body: 'Unsigned IPA built by GitHub Actions. Import into LiveContainer - it re-signs automatically. AI-coded.'
+          body: 'Unsigned IPA built by GitHub Actions on Xcode 26. Import into LiveContainer - it re-signs automatically. AI-coded.'
           files: RouteQuest.ipa
           prerelease: true
         env:
