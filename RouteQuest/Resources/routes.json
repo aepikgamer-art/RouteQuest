@@ -1,0 +1,609 @@
+[
+  {
+    "id": 0,
+    "airline": "Qantas",
+    "from": "SYD",
+    "to": "SFO",
+    "distanceKm": 10601,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Overwater"
+    ]
+  },
+  {
+    "id": 1,
+    "airline": "Qantas",
+    "from": "MEL",
+    "to": "SIN",
+    "distanceKm": 6022,
+    "aircraft": "Airbus A330-300",
+    "tags": [
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 2,
+    "airline": "Emirates",
+    "from": "DXB",
+    "to": "LHR",
+    "distanceKm": 5493,
+    "aircraft": "Airbus A380-800",
+    "tags": [
+      "A380",
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 3,
+    "airline": "Emirates",
+    "from": "DXB",
+    "to": "JFK",
+    "distanceKm": 11004,
+    "aircraft": "Airbus A380-800",
+    "tags": [
+      "A380",
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 4,
+    "airline": "Emirates",
+    "from": "DXB",
+    "to": "SIN",
+    "distanceKm": 6478,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 5,
+    "airline": "Singapore Airlines",
+    "from": "SIN",
+    "to": "JFK",
+    "distanceKm": 15346,
+    "aircraft": "Airbus A350-900ULR",
+    "tags": [
+      "Ultra-long-haul",
+      "Record route"
+    ]
+  },
+  {
+    "id": 6,
+    "airline": "Singapore Airlines",
+    "from": "SIN",
+    "to": "LHR",
+    "distanceKm": 10882,
+    "aircraft": "Airbus A380-800",
+    "tags": [
+      "A380",
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 7,
+    "airline": "Singapore Airlines",
+    "from": "SIN",
+    "to": "SYD",
+    "distanceKm": 6301,
+    "aircraft": "Boeing 787-10",
+    "tags": [
+      "Long-haul",
+      "Overwater"
+    ]
+  },
+  {
+    "id": 8,
+    "airline": "Cathay Pacific",
+    "from": "HKG",
+    "to": "JFK",
+    "distanceKm": 12816,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Ultra-long-haul",
+      "Polar route"
+    ]
+  },
+  {
+    "id": 9,
+    "airline": "Cathay Pacific",
+    "from": "HKG",
+    "to": "LHR",
+    "distanceKm": 9619,
+    "aircraft": "Airbus A350-1000",
+    "tags": [
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 10,
+    "airline": "ANA",
+    "from": "HND",
+    "to": "SFO",
+    "distanceKm": 8278,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Ultra-long-haul",
+      "Oceanic"
+    ]
+  },
+  {
+    "id": 11,
+    "airline": "Japan Airlines",
+    "from": "HND",
+    "to": "FRA",
+    "distanceKm": 9362,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Polar route"
+    ]
+  },
+  {
+    "id": 12,
+    "airline": "Korean Air",
+    "from": "ICN",
+    "to": "JFK",
+    "distanceKm": 11065,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Ultra-long-haul",
+      "Polar route"
+    ]
+  },
+  {
+    "id": 13,
+    "airline": "Air China",
+    "from": "PEK",
+    "to": "LAX",
+    "distanceKm": 10068,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Oceanic"
+    ]
+  },
+  {
+    "id": 14,
+    "airline": "Turkish Airlines",
+    "from": "IST",
+    "to": "SFO",
+    "distanceKm": 11192,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 15,
+    "airline": "Turkish Airlines",
+    "from": "IST",
+    "to": "JNB",
+    "distanceKm": 7772,
+    "aircraft": "Airbus A330-300",
+    "tags": [
+      "Long-haul",
+      "Africa link"
+    ]
+  },
+  {
+    "id": 16,
+    "airline": "Qatar Airways",
+    "from": "DOH",
+    "to": "AKL",
+    "distanceKm": 14539,
+    "aircraft": "Boeing 777-200LR",
+    "tags": [
+      "Ultra-long-haul",
+      "Record route"
+    ]
+  },
+  {
+    "id": 17,
+    "airline": "Qatar Airways",
+    "from": "DOH",
+    "to": "LAX",
+    "distanceKm": 13313,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 18,
+    "airline": "British Airways",
+    "from": "LHR",
+    "to": "SYD",
+    "distanceKm": 15177,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Kangaroo route"
+    ]
+  },
+  {
+    "id": 19,
+    "airline": "British Airways",
+    "from": "LHR",
+    "to": "JFK",
+    "distanceKm": 5540,
+    "aircraft": "Airbus A350-1000",
+    "tags": [
+      "A350",
+      "Transatlantic"
+    ]
+  },
+  {
+    "id": 20,
+    "airline": "Air France",
+    "from": "CDG",
+    "to": "SIN",
+    "distanceKm": 10729,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 21,
+    "airline": "Lufthansa",
+    "from": "FRA",
+    "to": "DEN",
+    "distanceKm": 8465,
+    "aircraft": "Airbus A350-900",
+    "tags": [
+      "A350",
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 22,
+    "airline": "Lufthansa",
+    "from": "FRA",
+    "to": "PVG",
+    "distanceKm": 8788,
+    "aircraft": "Boeing 747-8I",
+    "tags": [
+      "Queen of the Skies",
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 23,
+    "airline": "KLM",
+    "from": "AMS",
+    "to": "CPT",
+    "distanceKm": 9696,
+    "aircraft": "Boeing 787-10",
+    "tags": [
+      "Long-haul",
+      "Scenic descent"
+    ]
+  },
+  {
+    "id": 24,
+    "airline": "Iberia",
+    "from": "MAD",
+    "to": "EZE",
+    "distanceKm": 10082,
+    "aircraft": "Airbus A330-200",
+    "tags": [
+      "Ultra-long-haul",
+      "South Atlantic"
+    ]
+  },
+  {
+    "id": 25,
+    "airline": "ITA Airways",
+    "from": "FCO",
+    "to": "GRU",
+    "distanceKm": 9456,
+    "aircraft": "Airbus A330-900",
+    "tags": [
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 26,
+    "airline": "Icelandair",
+    "from": "KEF",
+    "to": "DEN",
+    "distanceKm": 3707,
+    "aircraft": "Boeing 737 MAX 8",
+    "tags": [
+      "Long-haul",
+      "Northern lights"
+    ]
+  },
+  {
+    "id": 27,
+    "airline": "Aeroflot",
+    "from": "SVO",
+    "to": "PEK",
+    "distanceKm": 5804,
+    "aircraft": "Airbus A330-300",
+    "tags": [
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 28,
+    "airline": "El Al",
+    "from": "TLV",
+    "to": "JFK",
+    "distanceKm": 9118,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 29,
+    "airline": "Saudia",
+    "from": "JED",
+    "to": "LHR",
+    "distanceKm": 4764,
+    "aircraft": "Boeing 787-10",
+    "tags": [
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 30,
+    "airline": "Air India",
+    "from": "DEL",
+    "to": "SFO",
+    "distanceKm": 12384,
+    "aircraft": "Boeing 777-200LR",
+    "tags": [
+      "Ultra-long-haul",
+      "Polar route"
+    ]
+  },
+  {
+    "id": 31,
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "SIN",
+    "distanceKm": 3921,
+    "aircraft": "Airbus A321neo",
+    "tags": [
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 32,
+    "airline": "Thai Airways",
+    "from": "BKK",
+    "to": "FRA",
+    "distanceKm": 8963,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 33,
+    "airline": "Air New Zealand",
+    "from": "AKL",
+    "to": "SFO",
+    "distanceKm": 10447,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Oceanic"
+    ]
+  },
+  {
+    "id": 34,
+    "airline": "South African Airways",
+    "from": "JNB",
+    "to": "LHR",
+    "distanceKm": 9010,
+    "aircraft": "Airbus A340-300",
+    "tags": [
+      "Ultra-long-haul"
+    ]
+  },
+  {
+    "id": 35,
+    "airline": "Ethiopian effect placeholder",
+    "from": "CAI",
+    "to": "LOS",
+    "distanceKm": 3451,
+    "aircraft": "Boeing 737-800",
+    "tags": [
+      "Long-haul",
+      "Sahara crossing"
+    ]
+  },
+  {
+    "id": 36,
+    "airline": "Kenya Airways",
+    "from": "NBO",
+    "to": "AMS",
+    "distanceKm": 6680,
+    "aircraft": "Boeing 787-8",
+    "tags": [
+      "A350",
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 37,
+    "airline": "Delta",
+    "from": "ATL",
+    "to": "LHR",
+    "distanceKm": 6769,
+    "aircraft": "Airbus A330-900neo",
+    "tags": [
+      "Transatlantic"
+    ]
+  },
+  {
+    "id": 38,
+    "airline": "Delta",
+    "from": "JFK",
+    "to": "CDG",
+    "distanceKm": 5837,
+    "aircraft": "Airbus A330-900neo",
+    "tags": [
+      "Transatlantic"
+    ]
+  },
+  {
+    "id": 39,
+    "airline": "United",
+    "from": "SFO",
+    "to": "SIN",
+    "distanceKm": 13593,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Record route"
+    ]
+  },
+  {
+    "id": 40,
+    "airline": "United",
+    "from": "ORD",
+    "to": "FRA",
+    "distanceKm": 6970,
+    "aircraft": "Boeing 787-10",
+    "tags": [
+      "Transatlantic"
+    ]
+  },
+  {
+    "id": 41,
+    "airline": "American",
+    "from": "MIA",
+    "to": "GRU",
+    "distanceKm": 6587,
+    "aircraft": "Boeing 777-200ER",
+    "tags": [
+      "Long-haul",
+      "Amazon crossing"
+    ]
+  },
+  {
+    "id": 42,
+    "airline": "Southwest",
+    "from": "DEN",
+    "to": "LAS",
+    "distanceKm": 626,
+    "aircraft": "Boeing 737-800",
+    "tags": [
+      "Short-haul",
+      "Scenic Rockies"
+    ]
+  },
+  {
+    "id": 43,
+    "airline": "Frontier",
+    "from": "DEN",
+    "to": "COS",
+    "distanceKm": 87,
+    "aircraft": "Airbus A320neo",
+    "tags": [
+      "Short-haul",
+      "Pikes Peak views"
+    ]
+  },
+  {
+    "id": 44,
+    "airline": "United",
+    "from": "DEN",
+    "to": "HND",
+    "distanceKm": 9174,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Oceanic"
+    ]
+  },
+  {
+    "id": 45,
+    "airline": "Alaska",
+    "from": "SEA",
+    "to": "ANC",
+    "distanceKm": 1449,
+    "aircraft": "Boeing 737-900ER",
+    "tags": [
+      "Short-haul",
+      "Glacier views"
+    ]
+  },
+  {
+    "id": 46,
+    "airline": "Air Canada",
+    "from": "YYZ",
+    "to": "HND",
+    "distanceKm": 10380,
+    "aircraft": "Boeing 777-300ER",
+    "tags": [
+      "Ultra-long-haul",
+      "Polar route"
+    ]
+  },
+  {
+    "id": 47,
+    "airline": "Aeroméxico",
+    "from": "MEX",
+    "to": "MAD",
+    "distanceKm": 8952,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Transatlantic"
+    ]
+  },
+  {
+    "id": 48,
+    "airline": "Avianca",
+    "from": "BOG",
+    "to": "MAD",
+    "distanceKm": 8036,
+    "aircraft": "Boeing 787-8",
+    "tags": [
+      "A350",
+      "Transatlantic"
+    ]
+  },
+  {
+    "id": 49,
+    "airline": "LATAM",
+    "from": "EZE",
+    "to": "MIA",
+    "distanceKm": 7101,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Long-haul"
+    ]
+  },
+  {
+    "id": 50,
+    "airline": "Qantas",
+    "from": "SYD",
+    "to": "JNB",
+    "distanceKm": 11623,
+    "aircraft": "Airbus A330-300",
+    "tags": [
+      "Ultra-long-haul",
+      "Indian Ocean"
+    ]
+  },
+  {
+    "id": 51,
+    "airline": "Fiji Airways placeholder",
+    "from": "LAX",
+    "to": "AKL",
+    "distanceKm": 10490,
+    "aircraft": "Boeing 787-9",
+    "tags": [
+      "Ultra-long-haul",
+      "Pacific crossing"
+    ]
+  }
+]
