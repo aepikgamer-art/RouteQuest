@@ -7,6 +7,7 @@ import Foundation
 
 struct Airport: Codable, Identifiable, Hashable {
     let iata: String
+    let icao: String
     let name: String
     let city: String
     let country: String
@@ -15,6 +16,11 @@ struct Airport: Codable, Identifiable, Hashable {
     let lon: Double
 
     var id: String { iata }
+
+    /// Display code honoring the user's ICAO preference.
+    func code(preferICAO: Bool) -> String {
+        preferICAO ? icao : iata
+    }
 }
 
 struct AirlineRoute: Codable, Identifiable, Hashable {
@@ -36,7 +42,12 @@ struct ScoredRoute: Identifiable, Hashable {
 
     var id: Int { route.id }
 
-    var title: String { "\(route.from) → \(route.to)" }
+    func title(preferICAO: Bool) -> String {
+        let f = from?.code(preferICAO: preferICAO) ?? route.from
+        let t = to?.code(preferICAO: preferICAO) ?? route.to
+        return "\(f) → \(t)"
+    }
+
     var subtitle: String { route.airline }
 
     var distanceMiles: Int { Int((Double(route.distanceKm) * 0.621371).rounded()) }

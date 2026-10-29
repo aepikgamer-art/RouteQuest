@@ -7,13 +7,14 @@ import SwiftUI
 
 struct RouteDetailView: View {
     @EnvironmentObject private var log: FlightLogStore
+    @AppStorage("preferICAO") private var preferICAO = false
     let scored: ScoredRoute
 
     var body: some View {
         List {
             Section {
                 VStack(spacing: 8) {
-                    Text(scored.title)
+                    Text(scored.title(preferICAO: preferICAO))
                         .font(.largeTitle.bold())
                     Text(scored.route.airline)
                         .font(.title3)
@@ -37,6 +38,10 @@ struct RouteDetailView: View {
                 }
                 LabeledContent("Recommendation score",
                                value: String(format: "%.0f / 100", scored.score))
+                if let f = scored.from, let t = scored.to {
+                    LabeledContent("IATA", value: "\(f.iata) → \(t.iata)")
+                    LabeledContent("ICAO", value: "\(f.icao) → \(t.icao)")
+                }
             }
 
             Section("Vibes") {

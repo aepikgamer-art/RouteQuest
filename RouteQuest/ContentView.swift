@@ -7,6 +7,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var log: FlightLogStore
+    @AppStorage("preferICAO") private var preferICAO = false
     @State private var filter = RouteFilter()
     @State private var showSettings = false
 
@@ -14,7 +15,6 @@ struct ContentView: View {
     private let airports = DataLoader.loadAirports()
 
     private var recommendations: [ScoredRoute] {
-        let stats = log.stats(routes: routes, airports: airports)
         let flownAirlines = Set(routes.filter { log.hasFlown($0.id) }.map(\.airline))
         let flownCountries = countriesVisited()
         return RecommenderEngine.recommend(routes,
@@ -57,6 +57,11 @@ struct ContentView: View {
                         Label(filter.tag ?? "Any vibe", systemImage: "sparkles")
                     }
                     Toggle("Show already flown", isOn: $filter.showFlown)
+                    Picker("Airport codes", selection: $preferICAO) {
+                        Text("IATA (ATL)").tag(false)
+                        Text("ICAO (KATL)").tag(true)
+                    }
+                    .pickerStyle(.segmented)
                 } header: {
                     Text("Filters")
                 }
@@ -70,7 +75,8 @@ struct ContentView: View {
                     ForEach(recs) { scored in
                         NavigationLink(value: scored) {
                             RouteRow(scored: scored,
-                                     flown: log.hasFlown(scored.route.id))
+                                     flown: log.hasFlown(scored.route.id),
+                                     preferICAO: preferICAO)
                         }
                     }
                 }
@@ -100,11 +106,12 @@ struct ContentView: View {
 struct RouteRow: View {
     let scored: ScoredRoute
     let flown: Bool
+    let preferICAO: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text(scored.title)
+                Text(scored.title(preferICAO: preferICAO))
                     .font(.headline)
                 Spacer()
                 if flown {
@@ -120,7 +127,7 @@ struct RouteRow: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             Text(scored.route.aircraft + " · " +
-                 "(scored.route.distanceKm) km / (scored.distanceMiles) mi")
+                 "\(scored.route.distanceKm) km / \(scored.distanceMiles) mi")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }
@@ -173,6 +180,7 @@ struct AboutSheet: View {
             VStack(alignment: .leading, spacing: 16) {
                 Label("RouteQuest recommends real airline routes to fly, ranked by an AI-written recommender engine.", systemImage: "sparkles")
                 Label("Every route in the dataset is (or was) flown by a real airline.", systemImage: "airplane")
+                Label("Switch between IATA (ATL) and ICAO (KATL) codes in the Filters section.", systemImage: "abc")
                 Label("This app was 100% coded by AI. No human wrote any of it. 🤖", systemImage: "brain")
                 Spacer()
             }
