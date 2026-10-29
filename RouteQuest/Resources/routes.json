@@ -408,7 +408,7 @@
   },
   {
     "id": 35,
-    "airline": "Ethiopian effect placeholder",
+    "airline": "EgyptAir",
     "from": "CAI",
     "to": "LOS",
     "distanceKm": 3451,
@@ -596,7 +596,7 @@
   },
   {
     "id": 51,
-    "airline": "Fiji Airways placeholder",
+    "airline": "Air New Zealand",
     "from": "LAX",
     "to": "AKL",
     "distanceKm": 10490,
