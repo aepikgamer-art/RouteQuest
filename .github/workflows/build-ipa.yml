@@ -1,0 +1,53 @@
+name: Build IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build-ipa:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build unsigned app
+        run: |
+          xcodebuild -project RouteQuest.xcodeproj \
+            -scheme RouteQuest \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
+            -derivedDataPath build/DerivedData \
+            build
+
+      - name: Package IPA
+        run: |
+          mkdir -p build/Payload
+          cp -r build/DerivedData/Build/Products/Release-iphoneos/RouteQuest.app build/Payload/
+          cd build && zip -qr ../RouteQuest.ipa Payload
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: RouteQuest-ipa
+          path: RouteQuest.ipa
+
+      - name: Attach IPA to release (main branch)
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-latest
+          name: RouteQuest (latest build)
+          body: 'Unsigned IPA built by GitHub Actions. Import into LiveContainer - it re-signs automatically. AI-coded.'
+          files: RouteQuest.ipa
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
