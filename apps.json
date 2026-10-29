@@ -1,0 +1,25 @@
+{
+  "name": "khyrie's apps",
+  "identifier": "com.aepikgamer.routequest.source",
+  "subtitle": "RouteQuest and friends",
+  "description": "Homebrew iOS apps by khyrie. RouteQuest recommends real-world airline routes to fly. 100% AI-coded.",
+  "tintColor": "FF7A00",
+  "featuredApps": [
+    "com.aepikgamer.routequest"
+  ],
+  "apps": [
+    {
+      "name": "RouteQuest",
+      "bundleIdentifier": "com.aepikgamer.routequest",
+      "developerName": "khyrie",
+      "subtitle": "Real-world airline route recommender",
+      "localizedDescription": "RouteQuest recommends real-world airline routes to fly, ranked by distance, aircraft rarity, and your own flight history. Track flown routes, filter by vibe (ultra-long-haul, A380, polar routes...), and switch between IATA and ICAO codes. Works fully offline. 100% AI-coded.",
+      "version": "1.1",
+      "versionDate": "2026-10-29T12:00:00Z",
+      "versionDescription": "Added ICAO airport codes with an IATA/ICAO display toggle.",
+      "downloadURL": "https://github.com/aepikgamer-art/RouteQuest/releases/download/build-latest/RouteQuest.ipa",
+      "tintColor": "FF7A00",
+      "screenshots": []
+    }
+  ]
+}
