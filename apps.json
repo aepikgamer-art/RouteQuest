@@ -14,12 +14,20 @@
       "developerName": "khyrie",
       "subtitle": "Real-world airline route recommender",
       "localizedDescription": "RouteQuest recommends real-world airline routes to fly, ranked by distance, aircraft rarity, and your own flight history. Track flown routes, filter by vibe (ultra-long-haul, A380, polar routes...), and switch between IATA and ICAO codes. Works fully offline. 100% AI-coded.",
-      "version": "1.1",
-      "versionDate": "2026-10-29T12:00:00Z",
-      "versionDescription": "Added ICAO airport codes with an IATA/ICAO display toggle.",
+      "version": "1.2",
+      "versionDate": "2026-10-29T13:00:00Z",
+      "versionDescription": "AltStore compatibility: minimum system version and localized metadata.",
       "downloadURL": "https://github.com/aepikgamer-art/RouteQuest/releases/download/build-latest/RouteQuest.ipa",
       "tintColor": "FF7A00",
-      "screenshots": []
+      "screenshots": [],
+      "minimumSystemVersion": "16.0",
+      "localizations": [
+        {
+          "language": "en-US",
+          "localizedDescription": "RouteQuest recommends real-world airline routes to fly, ranked by distance, aircraft rarity, and your own flight history. Track flown routes, filter by vibe (ultra-long-haul, A380, polar routes...), and switch between IATA and ICAO codes. Works fully offline. 100% AI-coded.",
+          "subtitle": "Real-world airline route recommender"
+        }
+      ]
     }
   ]
 }
