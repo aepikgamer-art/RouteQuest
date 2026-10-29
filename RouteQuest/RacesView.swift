@@ -5,10 +5,18 @@
 
 import SwiftUI
 
+enum DataProvider: String, CaseIterable, Identifiable {
+    case fr24 = "Flightradar24"
+    case flightaware = "FlightAware"
+    var id: String { rawValue }
+}
+
 /// Live "race" leaderboard: real flights currently en route to an airport,
-/// ranked by who's closest to landing. Powered by the Flightradar24 API.
+/// ranked by who's closest to landing. Powered by FR24 or FlightAware.
 struct RacesView: View {
-    @AppStorage("fr24Key") private var apiKey = ""
+    @AppStorage("provider") private var provider: DataProvider = .fr24
+    @AppStorage("fr24Key") private var fr24Key = ""
+    @AppStorage("flightAwareKey") private var faKey = ""
     @AppStorage("preferICAO") private var preferICAO = false
 
     private let airports = DataLoader.loadAirports()
@@ -18,7 +26,7 @@ struct RacesView: View {
     @State private var errorMessage: String?
 
     struct Racer: Identifiable {
-        let flight: FlightRadarService.FR24Flight
+        let flight: LiveFlight
         let kmToGo: Double
         var id: String { flight.id }
     }
@@ -29,6 +37,10 @@ struct RacesView: View {
         NavigationStack {
             List {
                 Section {
+                    Picker("Data provider", selection: $provider) {
+                        ForEach(DataProvider.allCases) { Text($0.rawValue).tag($0) }
+                    }
+                    .pickerStyle(.segmented)
                     Picker("Race finish line", selection: $destinationIata) {
                         ForEach(airports) { a in
                             Text("\(a.code(preferICAO: preferICAO)) — \(a.city)")
@@ -44,7 +56,7 @@ struct RacesView: View {
                 } header: {
                     Text("🏁 Race — who lands first?")
                 } footer: {
-                    Text("Live flights racing to \(destination?.city ?? destinationIata). Data from Flightradar24 — needs an API key (Settings tab).")
+                    Text("Live flights racing to \(destination?.city ?? destinationIata) via \(provider == .fr24 ? "Flightradar24" : "FlightAware AeroAPI"). Add an API key in Settings.")
                 }
 
                 if let errorMessage {
@@ -60,12 +72,13 @@ struct RacesView: View {
                             .foregroundStyle(.secondary)
                     }
                     ForEach(Array(flights.enumerated()), id: \.element.id) { idx, racer in
-                        RacerRow(place: idx + 1, racer: racer, preferICAO: preferICAO)
+                        RacerRow(place: idx + 1, racer: racer)
                     }
                 }
             }
             .navigationTitle("Races")
             .task { await refresh() }
+            .onChange(of: provider) { _ in Task { await refresh() } }
         }
     }
 
@@ -74,13 +87,19 @@ struct RacesView: View {
         loading = true
         errorMessage = nil
         do {
-            let all = try await FlightRadarService.shared.liveFlights(
-                bounds: FlightRadarService.bounds(around: dest, degrees: 8),
-                apiKey: apiKey)
-            let racers = all.compactMap { f -> Racer? in
-                guard let lat = f.lat, let lon = f.lon else { return nil }
-                guard f.destination_airport_iata == dest.iata || f.destination_airport_icao == dest.icao else { return nil }
-                return Racer(flight: f, kmToGo: FlightRadarService.distanceKm(lat: lat, lon: lon, to: dest))
+            let live: [LiveFlight]
+            switch provider {
+            case .fr24:
+                live = try await FlightRadarService.shared.liveFlights(
+                    bounds: boundsAround(dest, degrees: 8),
+                    apiKey: fr24Key)
+            case .flightaware:
+                live = try await FlightAwareService.shared.arrivals(to: dest.iata, apiKey: faKey)
+            }
+            let racers = live.compactMap { f -> Racer? in
+                guard f.isArriving(at: dest),
+                      let km = distanceToArrivalKm(f, to: dest) else { return nil }
+                return Racer(flight: f, kmToGo: km)
             }
             .sorted { $0.kmToGo < $1.kmToGo }
             flights = racers
@@ -95,7 +114,6 @@ struct RacesView: View {
 struct RacerRow: View {
     let place: Int
     let racer: RacesView.Racer
-    let preferICAO: Bool
 
     private var medal: String {
         switch place {
@@ -117,12 +135,12 @@ struct RacerRow: View {
                     .font(.caption.monospacedDigit())
                     .foregroundStyle(.secondary)
             }
-            Text("\(racer.flight.origin_airport_iata ?? "—") → \(racer.flight.destination_airport_iata ?? "—") · \(racer.flight.aircraft_type ?? "") \(racer.flight.registration ?? "")")
+            Text("\(racer.flight.originIata ?? "—") → \(racer.flight.destinationIata ?? "—") · \(racer.flight.aircraftType ?? "") \(racer.flight.registration ?? "")")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
             HStack(spacing: 12) {
-                Label(String(format: "%.0f kt", racer.flight.groundspeed_kts ?? 0), systemImage: "speedometer")
-                Label(String(format: "%.0f ft", racer.flight.altitude_ft ?? 0), systemImage: "arrow.up.to.line")
+                Label(String(format: "%.0f kt", racer.flight.groundspeedKts ?? 0), systemImage: "speedometer")
+                Label(String(format: "%.0f ft", racer.flight.altitudeFt ?? 0), systemImage: "arrow.up.to.line")
             }
             .font(.caption2)
             .foregroundStyle(.secondary)

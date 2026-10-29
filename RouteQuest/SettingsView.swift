@@ -5,15 +5,43 @@
 
 import SwiftUI
 
+enum Appearance: String, CaseIterable, Identifiable {
+    case system = "System"
+    case light = "Light"
+    case dark = "Dark"
+    var id: String { rawValue }
+}
+
 struct SettingsView: View {
-    @AppStorage("fr24Key") private var apiKey = ""
+    @AppStorage("provider") private var provider: DataProvider = .fr24
+    @AppStorage("fr24Key") private var fr24Key = ""
+    @AppStorage("flightAwareKey") private var faKey = ""
     @AppStorage("preferICAO") private var preferICAO = false
+    @AppStorage("appearance") private var appearance: Appearance = .system
 
     var body: some View {
         NavigationStack {
             Form {
+                Section("Appearance") {
+                    Picker("Theme", selection: $appearance) {
+                        ForEach(Appearance.allCases) { Text($0.rawValue).tag($0) }
+                    }
+                    .pickerStyle(.segmented)
+                }
+
                 Section {
-                    SecureField("API key", text: $apiKey)
+                    Picker("Provider", selection: $provider) {
+                        ForEach(DataProvider.allCases) { Text($0.rawValue).tag($0) }
+                    }
+                    .pickerStyle(.segmented)
+                } header: {
+                    Text("Flight data")
+                } footer: {
+                    Text("Races pulls live flights from whichever provider u pick. Both keys can be set — the app uses the selected one.")
+                }
+
+                Section {
+                    SecureField("API key", text: $fr24Key)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                     Link(destination: URL(string: "https://fr24api.flightradar24.com")!) {
@@ -22,7 +50,20 @@ struct SettingsView: View {
                 } header: {
                     Text("Flightradar24 API")
                 } footer: {
-                    Text("Used by the Races tab to pull live flight data. Stored only on ur device.")
+                    Text("Stored only on ur device.")
+                }
+
+                Section {
+                    SecureField("API key", text: $faKey)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                    Link(destination: URL(string: "https://www.flightaware.com/aeroapi/")!) {
+                        Label("Get a key at flightaware.com/aeroapi", systemImage: "key.radiowaves.forward")
+                    }
+                } header: {
+                    Text("FlightAware AeroAPI")
+                } footer: {
+                    Text("Alternative if u don't wanna use FR24. Stored only on ur device.")
                 }
 
                 Section("Airport codes") {
@@ -34,7 +75,7 @@ struct SettingsView: View {
                 }
 
                 Section("About") {
-                    LabeledContent("App", value: "RouteQuest 1.3")
+                    LabeledContent("App", value: "RouteQuest 1.4")
                     Label("Liquid Glass design on iOS 26", systemImage: "drop")
                     Label("100% coded by AI. No human wrote any of it. 🤖", systemImage: "brain")
                     Link(destination: URL(string: "https://github.com/aepikgamer-art/RouteQuest")!) {
